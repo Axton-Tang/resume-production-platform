@@ -1,8 +1,5 @@
-const {
-  app,
-  BrowserWindow
-} = require("electron");
-const path = require("path");
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
 
 function isDev() {
   return process.env.NODE_ENV === 'development';
@@ -14,8 +11,8 @@ function createWindow() {
     height: 750,
     webPreferences: {
       devTools: true,
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+    },
   });
   if (isDev()) {
     mainWindow.loadURL(`http://127.0.0.1:7001`);
@@ -26,7 +23,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
-  app.on("activate", function () {
+  app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
