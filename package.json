@@ -2,13 +2,57 @@
   "name": "resume-production-platform",
   "version": "1.0.0",
   "description": "智能简历制作平台",
-  "main": "./app/main/electron.js",
+  "main": "./app/main/electron.ts",
   "scripts": {
     "start:main": "webpack --config ./webpack/webpack.main.dev.js && electron ./dist/electron.ts",
-    "start:render": "webpack-dev-server --config ./webpack/webpack.render.dev.js"
+    "start:render": "webpack-dev-server --config ./webpack/webpack.render.dev.js",
+    "build:main": "webpack --config ./webpack/webpack.main.prod.js",
+    "build:render": "webpack --config ./webpack/webpack.render.prod.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.axton.resume",
+    "productName": "resumePlatform",
+    "copyright": "Copyright © 2021 ${author}",
+    "extends": null,
+    "files": [
+      "dist/**/*",
+      "package.json",
+      "node_modules/"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "distAssets" 
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "contents": [{
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    }
   },
   "keywords": [],
-  "author": "",
+  "author": "Axton-Tang",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -28,8 +72,11 @@
     "autoprefixer": "^9.0.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-react-css-modules": "^5.2.6",
+    "builder-util": "^22.11.7",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^3.0.0",
+    "electron": "^11.1.1",
+    "electron-builder": "^22.11.7",
     "eslint": "^7.26.0",
     "eslint-config-alloy": "^4.1.0",
     "eslint-config-prettier": "^8.3.0",
@@ -52,7 +99,6 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "electron": "^11.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.0",
