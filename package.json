@@ -23,7 +23,7 @@
     ],
     "directories": {
       "buildResources": "assets",
-      "output": "distAssets" 
+      "output": "distAssets"
     },
     "mac": {
       "target": [
@@ -32,7 +32,8 @@
       ]
     },
     "dmg": {
-      "contents": [{
+      "contents": [
+        {
           "x": 130,
           "y": 220
         },
@@ -67,6 +68,7 @@
     "@types/react-dom": "^17.0.7",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
+    "@types/redux-logger": "^3.0.8",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
     "autoprefixer": "^9.0.0",
@@ -90,6 +92,8 @@
     "postcss-less": "^3.1.4",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.3.0",
+    "rc-redux-model": "^1.0.9",
+    "redux-logger": "^3.0.6",
     "style-loader": "^2.0.0",
     "typescript": "^4.3.4",
     "webpack": "^4.44.1",
@@ -101,7 +105,9 @@
     "@babel/polyfill": "^7.12.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.1.0"
   }
 }
