@@ -75,6 +75,7 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-react-css-modules": "^5.2.6",
     "builder-util": "^22.11.7",
+    "classnames": "^2.3.1",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^3.0.0",
     "electron": "^11.1.1",
