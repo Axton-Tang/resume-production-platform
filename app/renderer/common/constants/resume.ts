@@ -47,7 +47,7 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
     key: RESUME_TOOLBAR_MAPS.projectExperience,
     name: '项目经验',
     summary: '展示研究过什么优秀项目和成果',
-    require: true,
+    require: false,
   },
   {
     key: RESUME_TOOLBAR_MAPS.workExperience,
@@ -71,7 +71,7 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
     key: RESUME_TOOLBAR_MAPS.skill,
     name: '技能清单',
     summary: '展示具备的技能，突出你的能力',
-    require: true,
+    require: false,
   },
   {
     key: RESUME_TOOLBAR_MAPS.test,
