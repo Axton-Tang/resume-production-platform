@@ -1,7 +1,6 @@
 export const RESUME_TOOLBAR_MAPS = {
   personal: 'personal', // 个人信息
   contact: 'contact', // 联系方式
-  education: 'education', // 教育信息
   workPrefer: 'workPrefer', // 工作期望
   schoolExperience: 'schoolExperience', // 在校经历
   projectExperience: 'projectExperience', // 项目经验
@@ -17,12 +16,6 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
     key: RESUME_TOOLBAR_MAPS.personal,
     name: '个人信息',
     summary: '更好介绍自己，机会会更多',
-    require: true,
-  },
-  {
-    key: RESUME_TOOLBAR_MAPS.education,
-    name: '教育信息',
-    summary: '介绍你的学校和专业信息',
     require: true,
   },
   {

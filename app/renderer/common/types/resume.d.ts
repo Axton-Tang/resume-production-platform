@@ -62,14 +62,6 @@ declare namespace TSResume {
      * @description 邮箱
      */
     email?: string;
-    /**
-     * @description github
-     */
-    github?: string;
-    /**
-     * @description 掘金
-     */
-    juejin?: string;
   }
 
   /**

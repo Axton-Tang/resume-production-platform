@@ -16,7 +16,7 @@ function Router() {
           <Resume />
         </Route>
       </Switch>
-      <Redirect to={ROUTER.root} />
+      <Redirect to={ROUTER.resume} />
     </HashRouter>
   );
 }

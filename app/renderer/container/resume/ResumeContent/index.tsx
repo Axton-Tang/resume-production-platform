@@ -7,10 +7,13 @@ import Messager, { MESSAGE_EVENT_NAME_MAPS } from '@common/messager';
 import { RESUME_TOOLBAR_MAPS } from '@common/constants/resume';
 
 import PersonalForm from './UseForm/Personal';
+import ContactFrom from './UseForm/Contact';
+import WorkForm from './UseForm/Work';
 
 function ResumeContent() {
   const HEADER_ACTION_HEIGHT = 92;
-  const height = document.body.clientHeight;
+  let height = document.body.clientHeight;
+  const [curHeight, setCurHeight] = useState(height);
   const [formName, setFormName] = useState('');
   const [showFormModal, setShowFormModal] = useState(false);
 
@@ -28,10 +31,22 @@ function ResumeContent() {
     });
   };
 
+  const onClose = () => {
+    setShowFormModal(false);
+    setFormName('');
+  };
+
+  useEffect(() => {
+    height = document.body.clientHeight;
+    setCurHeight(height);
+  });
+
   return (
-    <MyScrollBox maxHeight={height - HEADER_ACTION_HEIGHT}>
+    <MyScrollBox maxHeight={curHeight - HEADER_ACTION_HEIGHT}>
       <UseTemplateList.TemplateOne />
-      {showFormModal && formName === RESUME_TOOLBAR_MAPS.personal && <PersonalForm />}
+      {showFormModal && formName === RESUME_TOOLBAR_MAPS.personal && <PersonalForm onClose={onClose} />}
+      {showFormModal && formName === RESUME_TOOLBAR_MAPS.contact && <ContactFrom onClose={onClose} />}
+      {showFormModal && formName === RESUME_TOOLBAR_MAPS.workPrefer && <WorkForm onClose={onClose} />}
     </MyScrollBox>
   );
 }
