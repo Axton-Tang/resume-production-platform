@@ -10,16 +10,18 @@ interface IProps {
   onClose: () => void;
 }
 
-function WorkExperience({ onClose }: IProps) {
+function ProjectExperience({ onClose }: IProps) {
   const updateResumeHook = useUpdateResumeHook();
-  const workExperience: TSResume.WorkExperience[] = useSelector((state: any) => state.resumeModel.workExperience);
+  const projectExperience: TSResume.ProjectExperience[] = useSelector(
+    (state: any) => state.resumeModel.projectExperience
+  );
   const updateDataList = (newDataList: AdapterExperienceType[]) => {
-    updateResumeHook<AdapterExperienceType[]>('workExperience', newDataList);
+    updateResumeHook<AdapterExperienceType[]>('projectExperience', newDataList);
   };
 
   return (
     <MyModal.Dialog
-      title="工作经历"
+      title="项目经历"
       showFooter={false}
       config={{
         cancelBtn: {
@@ -29,11 +31,11 @@ function WorkExperience({ onClose }: IProps) {
       width={960}
       childStyle={{ padding: 0 }}
     >
-      <Wrapper dataList={AdapterExperience.work(workExperience)} updateDataList={updateDataList}>
+      <Wrapper dataList={AdapterExperience.project(projectExperience)} updateDataList={updateDataList}>
         <Form />
       </Wrapper>
     </MyModal.Dialog>
   );
 }
 
-export default WorkExperience;
+export default ProjectExperience;

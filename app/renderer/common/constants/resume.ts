@@ -6,9 +6,7 @@ export const RESUME_TOOLBAR_MAPS = {
   projectExperience: 'projectExperience', // 项目经验
   workExperience: 'workExperience', // 工作经历
   certificate: 'certificate', // 获奖证书
-  evaluation: 'evaluation', // 个人评价
   skill: 'skill', // 技能清单
-  test: 'test', // 测试用例
 };
 
 const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
@@ -55,21 +53,9 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
     require: false,
   },
   {
-    key: RESUME_TOOLBAR_MAPS.evaluation,
-    name: '个人评价',
-    summary: '低调夸一夸自己有什么亮点',
-    require: false,
-  },
-  {
     key: RESUME_TOOLBAR_MAPS.skill,
     name: '技能清单',
     summary: '展示具备的技能，突出你的能力',
-    require: false,
-  },
-  {
-    key: RESUME_TOOLBAR_MAPS.test,
-    name: '测试用例',
-    summary: '测试用例，一键覆盖',
     require: false,
   },
 ];

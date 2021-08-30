@@ -35,7 +35,7 @@ function TemplateOne() {
         </div>
         {/* 内容 */}
         <div styleName="center">
-          {(resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.education) || base.username) && <Synopsis />}
+          {(resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.personal) || base.username) && <Synopsis />}
           <div styleName="listData">
             {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.skill) && <Skill />}
             {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.schoolExperience) && <Post />}

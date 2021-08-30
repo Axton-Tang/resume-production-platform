@@ -6,6 +6,8 @@ function useUpdateResumeHook() {
   const updateContactHook = useUpdateContactHook();
   const updateWorkHook = useUpdateWorkHook();
   const updateWorkExperienceHook = useUpdateWorkExperienceHook();
+  const updateProjectExperienceHook = useUpdateProjectExperienceHook();
+  const updateSchoolExperienceHook = useUpdateSchoolExperienceHook();
   return <T>(stateKey: string, stateValue: T) => {
     const keys = stateKey.split('/') || [];
     if (keys[0]) {
@@ -20,6 +22,12 @@ function useUpdateResumeHook() {
       }
       if (keys[0] === 'workExperience') {
         updateWorkExperienceHook(keys[0], stateValue);
+      }
+      if (keys[0] === 'projectExperience') {
+        updateProjectExperienceHook(keys[0], stateValue);
+      }
+      if (keys[0] === 'schoolExperience') {
+        updateSchoolExperienceHook(keys[0], stateValue);
       }
     }
   };
@@ -77,6 +85,44 @@ function useUpdateWorkHook() {
 }
 
 function useUpdateWorkExperienceHook() {
+  const dispatch = useDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    let newList = (stateValue as any)?.map((s: AdapterExperienceType) => {
+      return {
+        ...s,
+        department: s?.title,
+      };
+    });
+    dispatch({
+      type: 'resumeModel/setStore',
+      payload: {
+        key: stateKey,
+        values: newList,
+      },
+    });
+  };
+}
+
+function useUpdateProjectExperienceHook() {
+  const dispatch = useDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    let newList = (stateValue as any)?.map((s: AdapterExperienceType) => {
+      return {
+        ...s,
+        projectName: s?.title,
+      };
+    });
+    dispatch({
+      type: 'resumeModel/setStore',
+      payload: {
+        key: stateKey,
+        values: newList,
+      },
+    });
+  };
+}
+
+function useUpdateSchoolExperienceHook() {
   const dispatch = useDispatch();
   return <T>(stateKey: string, stateValue: T) => {
     let newList = (stateValue as any)?.map((s: AdapterExperienceType) => {

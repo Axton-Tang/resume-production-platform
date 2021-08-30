@@ -18,13 +18,13 @@ function Form({ isDisable, currentItem, onChangeCurrentItem }: IProps) {
     <div styleName="wrapper">
       <div styleName="flex">
         <div styleName="left">
-          <span styleName="require">*</span>公司 ：
+          <span styleName="require">*</span>部 门 ：
         </div>
         <div styleName="right">
           <MyInput
             onChange={(e) => onChangeValue('title', e.target.value)}
             value={currentItem?.title}
-            placeholder="请输入之前就职的公司"
+            placeholder="请输入进入的部门"
             allowClear={!isDisable}
             disabled={isDisable}
           />
