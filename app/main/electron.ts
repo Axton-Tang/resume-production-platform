@@ -9,15 +9,27 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1150,
     height: 750,
+    resizable: false,
+    webPreferences: {
+      devTools: true,
+      nodeIntegration: true,
+    },
+  });
+  const settingWindow = new BrowserWindow({
+    width: 720,
+    height: 240,
+    resizable: false,
     webPreferences: {
       devTools: true,
       nodeIntegration: true,
     },
   });
   if (isDev()) {
-    mainWindow.loadURL(`http://127.0.0.1:7001`);
+    mainWindow.loadURL(`http://127.0.0.1:7001/index.html`);
+    settingWindow.loadURL(`http://127.0.0.1:7001/setting.html`);
   } else {
     mainWindow.loadURL(`file://${path.join(__dirname, '../dist/index.html')}`);
+    settingWindow.loadURL(`file://${path.join(__dirname, '../dist/setting.html')}`);
   }
 }
 
