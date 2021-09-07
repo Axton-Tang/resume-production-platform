@@ -11,13 +11,13 @@ import MyModal from '@src/common/components/MyModal';
 import { getAppPath } from '@src/common/utils/appPath';
 import fileAction from '@src/common/utils/file';
 import { intToDateString } from '@src/common/utils/time';
-import { createUID } from '@src/common/utils';
 import { compilePath } from '@src/common/utils/router';
 
 function ResumeAction() {
   const base: TSResume.Base = useSelector((state: any) => state.resumeModel.base);
   const work: TSResume.Work = useSelector((state: any) => state.resumeModel.work);
   const resume = useSelector((state: any) => state.resumeModel);
+  const resumeToolbarKeys = useSelector((state: any) => state.templateModel.resumeToolbarKeys);
   const history = useHistory();
   const readAppConfigThemeFile = useReadGlobalConfigFile();
   const updateGlobalConfigFile = useUpdateGlobalConfigFile();
@@ -55,15 +55,33 @@ function ResumeAction() {
 
   const saveResumeJson = (resumeSavePath: string) => {
     const date = intToDateString(new Date().valueOf(), '_');
-    const prefix = `${date}_${base?.username}_${base?.school}_${work?.job}_${createUID()}.json`;
+    const prefix = `${date}_${base?.username}_${base?.school}_${work?.job}_${Date.now()}.json`;
+    const jsonData = {
+      ...resume,
+      resumeToolbarKeys,
+    };
     // 如果路径中不存在 resumeCache 文件夹，则默认创建此文件夹
     if (resumeSavePath && resumeSavePath.search('resumeCache') > -1) {
-      fileAction?.write(`${resumeSavePath}/${prefix}`, resume, 'utf8');
+      if (fileAction.isExitsFoler(resumeSavePath)) {
+        console.log('我被执行了');
+        fileAction?.write(`${resumeSavePath}/${prefix}`, jsonData, 'utf8');
+      } else {
+        fileAction
+          ?.mkdirDir(resumeSavePath)
+          .then((path: any) => {
+            if (path) fileAction?.write(`${path}/${prefix}`, jsonData, 'utf8');
+          })
+          .catch(() => {
+            console.log('创建文件夹失败');
+          });
+      }
     } else {
       fileAction
         ?.mkdirDir(`${resumeSavePath}/resumeCache`)
-        .then((path: any) => {
-          if (path) fileAction?.write(`${path}/${prefix}`, resume, 'utf8');
+        .then(() => {
+          if (fileAction.isExitsFoler(`${resumeSavePath}/resumeCache`)) {
+            fileAction?.write(`${resumeSavePath}/resumeCache/${prefix}`, jsonData, 'utf8');
+          }
         })
         .catch(() => {
           console.log('创建文件夹失败');

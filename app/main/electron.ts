@@ -1,12 +1,16 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
-const path = require('path');
+import { app, BrowserWindow, ipcMain, dialog, Menu } from 'electron';
+import path from 'path';
+import customMenu from './customMenu';
+
+export interface MyBrowserWindow extends BrowserWindow {
+  uid?: string;
+}
 
 function isDev() {
   return process.env.NODE_ENV === 'development';
 }
-
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  const mainWindow: MyBrowserWindow = new BrowserWindow({
     width: 1150,
     height: 750,
     resizable: false,
@@ -15,14 +19,22 @@ function createWindow() {
       nodeIntegration: true,
     },
   });
-  const settingWindow = new BrowserWindow({
+  mainWindow.uid = 'mainWindow';
+  const settingWindow: MyBrowserWindow = new BrowserWindow({
     width: 720,
     height: 240,
+    show: false,
     resizable: false,
     webPreferences: {
       devTools: true,
       nodeIntegration: true,
     },
+  });
+  settingWindow.uid = 'settingWindow';
+  settingWindow.on('close', async (e) => {
+    settingWindow.hide();
+    e.preventDefault();
+    e.returnValue = false;
   });
   if (isDev()) {
     mainWindow.loadURL(`http://127.0.0.1:7001/index.html`);
@@ -32,6 +44,11 @@ function createWindow() {
     settingWindow.loadURL(`file://${path.join(__dirname, '../dist/setting.html')}`);
   }
 }
+
+app.on('ready', () => {
+  const menu = Menu.buildFromTemplate(customMenu);
+  Menu.setApplicationMenu(menu);
+});
 
 app.whenReady().then(() => {
   createWindow();

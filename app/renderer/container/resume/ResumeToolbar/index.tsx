@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './index.less';
 import MyScrollBox from '@common/components/MyScrollBox';
 import RESUME_TOOLBAR_LIST from '@common/constants/resume';
@@ -10,16 +10,26 @@ function ResumeToolbar() {
   const dispatch = useDispatch();
   const [addToolbarList, setAddToolbarList] = useState<TSResume.SliderItem[]>([]);
   const [unAddToolbarList, setUnAddToolbarList] = useState<TSResume.SliderItem[]>([]);
+  const readingLocalData = useSelector((state: any) => state.globalModel.readingLocalData);
+  const resumeToolbarKeys = useSelector((state: any) => state.templateModel.resumeToolbarKeys);
 
   useEffect(() => {
     if (RESUME_TOOLBAR_LIST.length) {
       const _addToolbarList: TSResume.SliderItem[] = [];
       const _unAddToolbarList: TSResume.SliderItem[] = [];
       RESUME_TOOLBAR_LIST.forEach((s: TSResume.SliderItem) => {
-        if (s.require) {
-          _addToolbarList.push(s);
+        if (readingLocalData) {
+          if (resumeToolbarKeys.includes(s.key)) {
+            _addToolbarList.push(s);
+          } else {
+            _unAddToolbarList.push(s);
+          }
         } else {
-          _unAddToolbarList.push(s);
+          if (s.require) {
+            _addToolbarList.push(s);
+          } else {
+            _unAddToolbarList.push(s);
+          }
         }
       });
       setAddToolbarList(_addToolbarList);

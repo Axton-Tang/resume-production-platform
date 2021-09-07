@@ -1,5 +1,6 @@
 export interface GStore {
   rootPath: string;
+  readingLocalData: boolean;
 }
 
 const globalModel: TSRcReduxModel.Props<GStore> = {
@@ -7,6 +8,7 @@ const globalModel: TSRcReduxModel.Props<GStore> = {
   openSeamlessImmutable: true,
   state: {
     rootPath: '',
+    readingLocalData: false,
   },
 };
 

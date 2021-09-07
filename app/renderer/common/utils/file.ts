@@ -30,6 +30,9 @@ const fileAction = {
   mkdirDir: (path: string) => {
     return fsPromiseAPIs.mkdir(path, { recursive: true });
   },
+  isExitsFoler: (path: string) => {
+    return fs.existsSync(path);
+  },
 };
 
 export default fileAction;
