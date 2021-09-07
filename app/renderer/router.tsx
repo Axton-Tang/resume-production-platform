@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
+import { HashRouter, Redirect } from 'react-router-dom';
 import ROUTER from '@common/constants/router';
 
 import useReadDirAssetsTemplateHooks from './hooks/useReadDirAssetsTemplateHooks';
@@ -17,17 +18,17 @@ function Router() {
 
   return (
     <HashRouter>
-      <Switch>
-        <Route path={ROUTER.root} exact>
+      <CacheSwitch>
+        <CacheRoute path={ROUTER.root} exact>
           <Root />
-        </Route>
-        <Route path={ROUTER.resume} exact>
+        </CacheRoute>
+        <CacheRoute path={ROUTER.resume} exact>
           <Resume />
-        </Route>
-        <Route path={ROUTER.templateList} exact>
+        </CacheRoute>
+        <CacheRoute path={ROUTER.templateList} exact>
           <TemplateList />
-        </Route>
-      </Switch>
+        </CacheRoute>
+      </CacheSwitch>
       <Redirect to={ROUTER.root} />
     </HashRouter>
   );

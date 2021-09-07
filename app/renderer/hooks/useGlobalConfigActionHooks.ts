@@ -1,10 +1,3 @@
-/*
- * @Description:全局配置表
- * @Author: pengdaokuan
- * @LastEditors: pengdaokuan
- * @Date: 2021-07-01 11:07:04
- * @LastEditTime: 2021-07-01 11:10:31
- */
 import path from 'path';
 import fileAction from '@common/utils/file';
 import { getAppPath } from '@common/utils/appPath';

@@ -1,6 +1,10 @@
 declare namespace TSTemplate {
   export interface Item {
     /**
+     * @description 模板下标
+     */
+    templateIndex: number;
+    /**
      * @description 模版id
      */
     templateId: string;

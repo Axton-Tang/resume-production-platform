@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './index.less';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
-import ROUTER from '@src/common/constants/router';
+import { useHistory, useParams } from 'react-router';
+import ROUTER, { ROUTER_KEY } from '@src/common/constants/router';
 import toPrintPdf from '@common/utils/htmlToPdf';
 import { useReadGlobalConfigFile, useUpdateGlobalConfigFile } from '@src/hooks/useGlobalConfigActionHooks';
 
@@ -12,19 +12,32 @@ import { getAppPath } from '@src/common/utils/appPath';
 import fileAction from '@src/common/utils/file';
 import { intToDateString } from '@src/common/utils/time';
 import { createUID } from '@src/common/utils';
+import { compilePath } from '@src/common/utils/router';
 
 function ResumeAction() {
   const base: TSResume.Base = useSelector((state: any) => state.resumeModel.base);
   const work: TSResume.Work = useSelector((state: any) => state.resumeModel.work);
   const resume = useSelector((state: any) => state.resumeModel);
   const history = useHistory();
-
   const readAppConfigThemeFile = useReadGlobalConfigFile();
   const updateGlobalConfigFile = useUpdateGlobalConfigFile();
 
   const [componentVisible, setComponentVisible] = useState(false);
 
-  const onBack = () => history.push(ROUTER.root);
+  const routerParams =
+    useParams<{
+      fromPath: string;
+      templateId: string;
+      templateIndex: string;
+    }>();
+
+  const onBack = () => {
+    if (routerParams?.fromPath === ROUTER_KEY.root) {
+      history.push(compilePath(ROUTER.root));
+    } else if (routerParams?.fromPath === ROUTER_KEY.templateList) {
+      history.push(compilePath(ROUTER.templateList));
+    }
+  };
   const onExport = () => {
     toPrintPdf(`${base.username}的简历`);
     setComponentVisible(false);

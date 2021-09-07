@@ -20,6 +20,7 @@ const templateModel: TSRcReduxModel.Props<TStore> = {
     resumeToolbarKeys: [],
     templateList: [],
     selectTemplate: {
+      templateIndex: 0,
       templateId: '',
       templateName: '',
       templateCover: '',

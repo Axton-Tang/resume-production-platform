@@ -1,7 +1,3 @@
-/**
- * @description 图片上传组件，基于 Input 二次封装
- * @author {pengdaokuan}
- */
 import React from 'react';
 import './index.less';
 import Upload from '../Upload';

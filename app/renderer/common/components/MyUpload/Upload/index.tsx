@@ -1,7 +1,3 @@
-/**
- * @desc 上传控件，默认自带的input样式
- * @author {pengdaokuan}
- */
 import React, { useRef } from 'react';
 import './index.less';
 import classnames from 'classnames';

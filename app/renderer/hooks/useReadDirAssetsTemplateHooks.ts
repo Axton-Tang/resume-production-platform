@@ -12,10 +12,11 @@ export default function () {
         .then(async (files: string[]) => {
           if (files.length > 0) {
             let templateList: TSTemplate.Item[] = [];
-            for (const fileName of files) {
-              const base64URL = await fileAction.read(`${appPath}assets/template/${fileName}`, 'base64');
+            for (let idx = 0; idx < files.length; idx++) {
+              const base64URL = await fileAction.read(`${appPath}assets/template/${files[idx]}`, 'base64');
               templateList.push({
-                templateName: fileName,
+                templateName: files[idx],
+                templateIndex: idx,
                 templateId: createUID(),
                 templateCover: `data:image/png;base64,${base64URL}`,
               });

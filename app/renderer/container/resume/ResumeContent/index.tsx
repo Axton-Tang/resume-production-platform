@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './index.less';
-
+import { useParams } from 'react-router';
 import * as UseTemplateList from './UseTemplate';
 import MyScrollBox from '@src/common/components/MyScrollBox';
 import Messager, { MESSAGE_EVENT_NAME_MAPS } from '@common/messager';
@@ -16,6 +16,7 @@ import SchoolExperienceForm from './UseForm/SchoolExperience';
 function ResumeContent() {
   const HEADER_ACTION_HEIGHT = 92;
   let height = document.body.clientHeight;
+  const routerParams = useParams<{ fromPath: string; templateId: string; templateIndex: string }>();
   const [curHeight, setCurHeight] = useState(height);
   const [formName, setFormName] = useState('');
   const [showFormModal, setShowFormModal] = useState(false);
@@ -46,7 +47,7 @@ function ResumeContent() {
 
   return (
     <MyScrollBox maxHeight={curHeight - HEADER_ACTION_HEIGHT}>
-      <UseTemplateList.TemplateOne />
+      {routerParams?.templateId && Number(routerParams?.templateIndex) === 0 && <UseTemplateList.TemplateOne />}
       {showFormModal && formName === RESUME_TOOLBAR_MAPS.personal && <PersonalForm onClose={onClose} />}
       {showFormModal && formName === RESUME_TOOLBAR_MAPS.contact && <ContactFrom onClose={onClose} />}
       {showFormModal && formName === RESUME_TOOLBAR_MAPS.workPrefer && <WorkForm onClose={onClose} />}

@@ -1,7 +1,8 @@
 // 路由路径
 const ROUTER = {
   root: '/',
-  resume: '/resume',
+  resume: '/resume/:fromPath/:templateId/:templateIndex',
+  template: '/template',
   templateList: '/templateList',
 };
 export default ROUTER;
