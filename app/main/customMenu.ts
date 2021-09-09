@@ -1,4 +1,5 @@
 import { MenuItemConstructorOptions, app, MenuItem, BrowserWindow } from 'electron';
+import path from 'path';
 import { MyBrowserWindow } from './electron';
 
 const customMenu: (MenuItemConstructorOptions | MenuItem)[] = [
@@ -110,10 +111,19 @@ const customMenu: (MenuItemConstructorOptions | MenuItem)[] = [
       {
         label: '修改简历数据储存路径',
         click: () => {
-          const wins: MyBrowserWindow[] = BrowserWindow.getAllWindows();
-          const currentWindow = wins.find((w) => w.uid === 'settingWindow');
-          if (currentWindow) {
-            currentWindow.show();
+          const settingWindow: MyBrowserWindow = new BrowserWindow({
+            width: 720,
+            height: 240,
+            resizable: false,
+            webPreferences: {
+              devTools: true,
+              nodeIntegration: true,
+            },
+          });
+          if (isDev()) {
+            settingWindow.loadURL(`http://127.0.0.1:7001/setting.html`);
+          } else {
+            settingWindow.loadURL(`file://${path.join(__dirname, '../dist/setting.html')}`);
           }
         },
       },
@@ -170,3 +180,7 @@ if (process.platform === 'darwin') {
 }
 
 export default customMenu;
+
+function isDev() {
+  return process.env.NODE_ENV === 'development';
+}

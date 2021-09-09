@@ -21,28 +21,23 @@ function createWindow() {
     },
   });
   mainWindow.uid = 'mainWindow';
-  const settingWindow: MyBrowserWindow = new BrowserWindow({
-    width: 720,
-    height: 240,
-    show: false,
-    resizable: false,
-    webPreferences: {
-      devTools: true,
-      nodeIntegration: true,
-    },
-  });
-  settingWindow.uid = 'settingWindow';
-  settingWindow.on('close', async (e) => {
-    settingWindow.hide();
-    e.preventDefault();
-    e.returnValue = false;
-  });
+  // const settingWindow: MyBrowserWindow = new BrowserWindow({
+  //   width: 720,
+  //   height: 240,
+  //   show: false,
+  //   frame: false,
+  //   resizable: false,
+  //   webPreferences: {
+  //     devTools: true,
+  //     nodeIntegration: true,
+  //   },
+  // });
+  // settingWindow.uid = 'settingWindow';
+
   if (isDev()) {
     mainWindow.loadURL(`http://127.0.0.1:7001/index.html`);
-    settingWindow.loadURL(`http://127.0.0.1:7001/setting.html`);
   } else {
     mainWindow.loadURL(`file://${path.join(__dirname, '../dist/index.html')}`);
-    settingWindow.loadURL(`file://${path.join(__dirname, '../dist/setting.html')}`);
   }
 }
 
