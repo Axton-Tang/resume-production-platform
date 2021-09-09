@@ -8,7 +8,7 @@ import { useReadGlobalConfigFile, useUpdateGlobalConfigFile } from '@src/hooks/u
 
 import MyButton from '@common/components/MyButton';
 import MyModal from '@src/common/components/MyModal';
-import { getAppPath } from '@src/common/utils/appPath';
+import { getUserStoreDataPath } from '@src/common/utils/appPath';
 import fileAction from '@src/common/utils/file';
 import { intToDateString } from '@src/common/utils/time';
 import { compilePath } from '@src/common/utils/router';
@@ -45,7 +45,7 @@ function ResumeAction() {
       if (value?.resumeSavePath) {
         saveResumeJson(value?.resumeSavePath);
       } else {
-        getAppPath().then((appPath: string) => {
+        getUserStoreDataPath().then((appPath: string) => {
           updateGlobalConfigFile('resumeSavePath', `${appPath}resumeCache`);
           saveResumeJson(`${appPath}resumeCache`);
         });

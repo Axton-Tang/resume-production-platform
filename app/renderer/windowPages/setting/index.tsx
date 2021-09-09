@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ipcRenderer } from 'electron';
 import './index.less';
-import { getAppPath } from '@src/common/utils/appPath';
+import { getUserStoreDataPath } from '@src/common/utils/appPath';
 import { useReadGlobalConfigFile, useUpdateGlobalConfigFile } from '@src/hooks/useGlobalConfigActionHooks';
 
 function Setting() {
@@ -14,7 +14,7 @@ function Setting() {
       if (value?.resumeSavePath) {
         setResumeSavePath(value?.resumeSavePath);
       } else {
-        getAppPath().then((appPath: string) => {
+        getUserStoreDataPath().then((appPath: string) => {
           setResumeSavePath(`${appPath}resumeCache`);
           updateGlobalConfigFile('resumeSavePath', `${appPath}resumeCache`);
         });

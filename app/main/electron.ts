@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog, Menu } from 'electron';
 import path from 'path';
 import customMenu from './customMenu';
+import './userData';
 
 export interface MyBrowserWindow extends BrowserWindow {
   uid?: string;
@@ -59,7 +60,7 @@ app.whenReady().then(() => {
 
 const ROOT_PATH = path.join(app.getAppPath(), '../');
 ipcMain.on('get-root-path', (event, arg) => {
-  event.reply('reply-root-path', ROOT_PATH);
+  event.reply('reply-root-path', isDev() ? ROOT_PATH : __dirname);
 });
 
 ipcMain.on('open-save-resume-path', (event, arg) => {

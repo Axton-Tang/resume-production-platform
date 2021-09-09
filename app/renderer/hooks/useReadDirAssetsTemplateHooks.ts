@@ -8,12 +8,12 @@ export default function () {
   return () => {
     getAppPath().then((appPath: string) => {
       fileAction
-        .readDir(`${appPath}assets/template`)
+        .readDir(`${appPath}/assets/template`)
         .then(async (files: string[]) => {
           if (files.length > 0) {
             let templateList: TSTemplate.Item[] = [];
             for (let idx = 0; idx < files.length; idx++) {
-              const base64URL = await fileAction.read(`${appPath}assets/template/${files[idx]}`, 'base64');
+              const base64URL = await fileAction.read(`${appPath}/assets/template/${files[idx]}`, 'base64');
               templateList.push({
                 templateName: files[idx],
                 templateIndex: idx,
